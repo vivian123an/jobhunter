@@ -1,10 +1,14 @@
 package us.codercrafe.vivian;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import net.sf.ehcache.CacheManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,28 +27,28 @@ public class MybatisEhcacheTest {
     private JobInfoDAO jobInfoDAO;
 	@Resource
 	private FootballMatchDAO footballMatchDAO;
-	
-	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	@Test
 	public void testSelect() {
 	    // the first time
 		Map<String,Object> params = new HashMap<String, Object>();
 		//params.put("urlMd5", "82dc3c989731b883fb17863949e320d1");
 		params.put("source", "lietou.com");
 		
-	    long begin = System.currentTimeMillis();
+	    long begin = System.nanoTime();
 	    List<LieTouJobInfo> list = jobInfoDAO.findLieTouJobInfo(params);
-	    long end = System.currentTimeMillis() - begin;
+	    long end = System.nanoTime() - begin;
 	    System.out.println("count----1 :" + end);
 	    System.out.println("size ----  :"+list.size());
 	    
 	    // the second time
-	    begin = System.currentTimeMillis();
+	    begin = System.nanoTime();
 	    list = jobInfoDAO.findLieTouJobInfo(params);
-	    end = System.currentTimeMillis() - begin;
+	    end = System.nanoTime() - begin;
 	    System.out.println("count----2 :" + end);
 	    System.out.println("size ----  :"+list.size());
 	    
-	    for(int i=0;i<100;i++){
+	    for(int i=0;i<3;i++){
 		    LieTouJobInfo jobInfo = new LieTouJobInfo();
 		    jobInfo.setCompany("测试");
 		    jobInfo.setTitle("测试");
@@ -53,35 +57,37 @@ public class MybatisEhcacheTest {
 	    }
 	    
 	    // the third time
-	    begin = System.currentTimeMillis();
+	    begin = System.nanoTime();
 	    list = jobInfoDAO.findLieTouJobInfo(params);
-	    end = System.currentTimeMillis() - begin;
+	    end = System.nanoTime() - begin;
 	    System.out.println("count----3 :" + end);
 	    System.out.println("size ----  :"+list.size());
 	}
 	
-	@Test
+	
 	public void testSelect2() {
 	    // the first time
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("updateDate", "2014-08-17");
-	    long begin = System.currentTimeMillis();
+	    long begin = System.nanoTime();
 	    List<FootballMatch> list = footballMatchDAO.findFootballMatch(params);
-	    long end = System.currentTimeMillis() - begin;
-	    System.out.println("count----1 :" + end);
-	    System.out.println("size ----  :"+list.size());
+	    long end = System.nanoTime() - begin;
+	    System.out.println(sdf.format(new Date())+" count----1 :" + end);
+	    System.out.println(sdf.format(new Date())+" size ----  :"+list.size());
 	    // the second time
-	    begin = System.currentTimeMillis();
+	    begin = System.nanoTime();
 	    list = footballMatchDAO.findFootballMatch(params);
-	    end = System.currentTimeMillis() - begin;
-	    System.out.println("count----2 :" + end);
-	    System.out.println("size ----  :"+list.size());
+	    end = System.nanoTime() - begin;
+	    System.out.println(sdf.format(new Date())+" count----2 :" + end);
+	    System.out.println(sdf.format(new Date())+" size ----  :"+list.size());
 	    // the third time
-	    begin = System.currentTimeMillis();
-	    list = footballMatchDAO.findFootballMatch(params);
-	    end = System.currentTimeMillis() - begin;
-	    System.out.println("count----3 :" + end);
-	    System.out.println("size ----  :"+list.size());
+	    for(int i=3;i<100;i++){
+		    begin = System.nanoTime();
+		    list = footballMatchDAO.findFootballMatch(params);
+		    end = System.nanoTime() - begin;
+		    System.out.println(sdf.format(new Date())+" count----"+i+" :" + end);
+		    System.out.println(sdf.format(new Date())+" size ----  :"+list.size());
+	    }
 	     
 	} 
 }

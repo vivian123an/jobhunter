@@ -3,7 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="us.codecraft.jobhunter.dao.FootballMatchDAO">
-    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> -->  
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache" > 
+	    <property name="timeToIdleSeconds" value="0.1"/>
+	    <property name="timeToLiveSeconds" value="0.2"/>
+	    <property name="maxEntriesLocalHeap" value="2288"/>
+	    <property name="maxEntriesLocalDisk" value="10000"/>
+	    <property name="memoryStoreEvictionPolicy" value="LRU"/>
+	</cache>
     <select id="findFootballMatch" parameterType="map" resultType="us.codecraft.jobhunter.model.FootballMatch">
         select  
 			football_match_id footballMatchId,

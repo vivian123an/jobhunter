@@ -18,11 +18,30 @@
 	在linux中, 通常会在: /tmp 下System.out.println(System.getProperty("java.io.tmpdir"));
 	
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> //最普通的设置，沿用全局设置
+	
+	参考资料
+	http://qiuqiu0034.iteye.com/blog/1162952
+	http://www.cnblogs.com/hoojo/archive/2012/07/12/2587556.html
+	http://my.oschina.net/541996928/blog/131329
+	http://raychase.iteye.com/blog/1545906
+	http://www.ibm.com/developerworks/cn/java/j-lo-ehcache/
+	http://www.iteye.com/topic/369725
+	http://www.tuicool.com/articles/EZBniy
 	-->
 	
 	<diskStore path="java.io.tmpdir" />
-	<defaultCache maxElementsInMemory="1000" eternal="false"
-		timeToIdleSeconds="0" timeToLiveSeconds="0" overflowToDisk="false" />
+	<defaultCache maxElementsInMemory="2288" 
+				eternal="false"
+				timeToIdleSeconds="2" 
+				timeToLiveSeconds="3" 
+				overflowToDisk="false"
+				memoryStoreEvictionPolicy="LRU" />
 	
-	
+	<!-- <cache name="us.codecraft.jobhunter.model.FootballMatch"
+		maxElementsInMemory="1000"
+		eternal="false"
+		timeToIdleSeconds="2"
+		timeToLiveSeconds="3"
+		overflowToDisk="false"
+	/> -->
 </ehcache>
