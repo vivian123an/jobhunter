@@ -15,18 +15,17 @@ import javax.annotation.Resource;
  * Time: 下午8:33
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring/applicationContext-*.xml"})
+@ContextConfiguration(locations = {"classpath:/spring/applicationContext*.xml"})
 public class JobInfoDaoTest {
     @Resource
     private JobInfoDAO jobInfoDAO;
 
-    @Ignore
     @Test
     public void test() {
         LieTouJobInfo jobInfo = new LieTouJobInfo();
         jobInfo.setSource("a");
         try {
-            final int add = jobInfoDAO.add(jobInfo);
+            final int add = jobInfoDAO.saveLieTouJobInfo(jobInfo);
             System.out.println(add);
         } catch (Exception e) {
             e.printStackTrace();

@@ -16,6 +16,7 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
 @TargetUrl("http://job.liepin.com/[\\d_]+")
 @HelpUrl("*sojob/\\?setdefault=true&curPage=\\d+")
 public class LieTouJobInfo implements AfterExtractor {
+	private Long jobinfoId;
     @ExtractBy("//div[@class=\"main-view\"]/h1")
     private String title="";
     @ExtractBy("//div[@class='salary']//em")
@@ -31,7 +32,23 @@ public class LieTouJobInfo implements AfterExtractor {
     private String url="";
     private String urlMd5="";
 
-    public String getTitle() {
+    public Long getJobinfoId() {
+		return jobinfoId;
+	}
+
+	public void setJobinfoId(Long jobinfoId) {
+		this.jobinfoId = jobinfoId;
+	}
+
+	public String getUrlMd5() {
+		return urlMd5;
+	}
+
+	public void setUrlMd5(String urlMd5) {
+		this.urlMd5 = urlMd5;
+	}
+
+	public String getTitle() {
         return title;
     }
 

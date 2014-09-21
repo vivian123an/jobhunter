@@ -1,6 +1,8 @@
 package us.codecraft.jobhunter.dao;
 
-import org.apache.ibatis.annotations.Insert;
+import java.util.List;
+import java.util.Map;
+
 import us.codecraft.jobhunter.model.LieTouJobInfo;
 
 /**
@@ -10,6 +12,7 @@ import us.codecraft.jobhunter.model.LieTouJobInfo;
  */
 public interface JobInfoDAO {
 
-    @Insert("insert into JobInfo (`title`,`salary`,`company`,`description`,`requirement`,`source`,`url`,`urlMd5`) values (#{title},#{salary},#{company},#{description},#{requirement},#{source},#{url},#{urlMd5})")
-    public int add(LieTouJobInfo jobInfo);
+    public int saveLieTouJobInfo(LieTouJobInfo jobInfo);
+    
+    public List<LieTouJobInfo> findLieTouJobInfo(Map<String,Object> params);
 }
