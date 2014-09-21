@@ -26,7 +26,6 @@
 		  <groupId>org.mybatis</groupId>
 		  <artifactId>mybatis-ehcache</artifactId>
 		  <version>1.0.0</version>
-		  <type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

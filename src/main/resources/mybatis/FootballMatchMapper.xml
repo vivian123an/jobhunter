@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="us.codecraft.jobhunter.dao.FootballMatchDAO">
+    
+    <select id="findFootballMatch" parameterType="map" resultType="us.codecraft.jobhunter.model.FootballMatch">
+        select  
+			football_match_id footballMatchId,
+			type_code typeCode,
+			type_name typeName,
+			pdate,
+			zid ,
+			lottery_period_id lotteryPeriodId,
+			expect,
+			game_num,
+			league ,
+			end_time endTime,
+			concede_t_line_green concedeTLineGreen,
+			homesxname,
+			awaysxname,
+			 nspf1,
+			 nspf2,
+			 nspf3,
+			 nspf4,
+			 nspf5,
+			 nspf6,
+			 spf1,
+			 spf2,
+			 spf3,
+			 spf4,
+			 spf5,
+			 spf6,
+			 spf7,
+			 spf8,
+			 update_date updateDate，
+			 create_date createDate
+            from football_match 
+        where 1=1
+        <if test="updateDate!=null and updateDate!=''">
+            and update_date <![CDATA[>=]]>
+            concat(#{updateDate},' 23:59:59')
+        </if>
+    </select>
+
+</mapper>
+    

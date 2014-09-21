@@ -3,6 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="us.codecraft.jobhunter.dao.JobInfoDAO">
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache" > 
+	    <property name="timeToIdleSeconds" value="3600"/>1 hour
+	    <property name="timeToLiveSeconds" value="3600"/>1 hour
+	    <property name="maxEntriesLocalHeap" value="1000"/>
+	    <property name="maxEntriesLocalDisk" value="10000000"/>
+	    <property name="memoryStoreEvictionPolicy" value="LRU"/>
+	<cache> -->
     
     <select id="findLieTouJobInfo" parameterType="map" resultType="us.codecraft.jobhunter.model.LieTouJobInfo">
         select  t.jobinfoId,
@@ -15,7 +23,13 @@
                 t.url ,
                 t.urlMd5 
             from jobinfo t
-        where t.urlMd5=#{urlMd5}
+        where 1=1
+        <if test="urlMd5!=null and urlMd5!=''">
+            and t.urlMd5=#{urlMd5}
+        </if>
+        <if test="source!=null and source!=''">
+            and t.source=#{source}
+        </if>
     </select>
 
 	<insert id="saveLieTouJobInfo" parameterType="us.codecraft.jobhunter.model.LieTouJobInfo">

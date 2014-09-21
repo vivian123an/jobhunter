@@ -9,7 +9,11 @@
     </appender>
 
     <logger name="org.apache" additivity="false">
-        <level value="warn" />
+     	<!-- log4j中输入信息的级别有debug,info,warn,error,fatal 5个级别
+		他们对应的是输出信息的级别,级别越低信息输入越详细.使用debug级别的时候,info中的信息也能输出
+		使用info的时候,debug对应的信息显示不出来
+		一般在开发的时候使用debug, 开发完成后使用error -->
+        <level value="debug" />
         <appender-ref ref="stdout" />
     </logger>
 

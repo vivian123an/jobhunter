@@ -21,15 +21,8 @@
 	-->
 	
 	<diskStore path="java.io.tmpdir" />
-	<defaultCache maxElementsInMemory="0" eternal="false"
+	<defaultCache maxElementsInMemory="1000" eternal="false"
 		timeToIdleSeconds="0" timeToLiveSeconds="0" overflowToDisk="false" />
 	
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" > 
-	    <property name="timeToIdleSeconds" value="3600"/><!--1 hour-->
-	    <property name="timeToLiveSeconds" value="3600"/><!--1 hour-->
-	    <property name="maxEntriesLocalHeap" value="1000"/>
-	    <property name="maxEntriesLocalDisk" value="10000000"/>
-	    <property name="memoryStoreEvictionPolicy" value="LRU"/>
-	<cache>
 	
 </ehcache>
