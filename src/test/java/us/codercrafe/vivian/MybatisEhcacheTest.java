@@ -24,7 +24,7 @@ public class MybatisEhcacheTest {
 	@Resource
 	private FootballMatchDAO footballMatchDAO;
 	
-	@Test
+	
 	public void testSelect() {
 	    // the first time
 		Map<String,Object> params = new HashMap<String, Object>();
@@ -60,11 +60,11 @@ public class MybatisEhcacheTest {
 	    System.out.println("size ----  :"+list.size());
 	}
 	
-	
+	@Test
 	public void testSelect2() {
 	    // the first time
 		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("updateDate", "2014-08-18 00:55:01");
+		params.put("updateDate", "2014-08-17");
 	    long begin = System.currentTimeMillis();
 	    List<FootballMatch> list = footballMatchDAO.findFootballMatch(params);
 	    long end = System.currentTimeMillis() - begin;

@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="us.codecraft.jobhunter.dao.FootballMatchDAO">
-    
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
     <select id="findFootballMatch" parameterType="map" resultType="us.codecraft.jobhunter.model.FootballMatch">
         select  
 			football_match_id footballMatchId,
@@ -33,7 +33,7 @@
 			 spf6,
 			 spf7,
 			 spf8,
-			 update_date updateDate，
+			 update_date updateDate,
 			 create_date createDate
             from football_match 
         where 1=1
